@@ -176,8 +176,8 @@ class Home : BaseActivity<HomeBinding>() {
         val storageManager = application.getSystemService(Context.STORAGE_SERVICE) as StorageManager
         val intent = storageManager.primaryStorageVolume.createOpenDocumentTreeIntent()
         val separator = "%2F"
-        val targetDir =
-            "Android${separator}media${separator}com.whatsapp${separator}WhatsApp${separator}Media${separator}.Statuses"
+       // val targetDir = "Android${separator}media${separator}com.whatsapp${separator}WhatsApp${separator}Media${separator}.Statuses"
+        val targetDir = "Android${separator}media${separator}com.whatsapp${separator}WhatsApp${separator}"
         var uri = intent.getParcelableExtra<Uri>("android.provider.extra.INITIAL_URI") as Uri
         var schema = uri.toString()
         schema = schema.replace("/root/", "/document/")
@@ -196,11 +196,30 @@ class Home : BaseActivity<HomeBinding>() {
         if (resultCode == RESULT_OK && requestCode == 123) {
             val treeUri = data?.data
             if (treeUri != null) {
-                contentResolver.takePersistableUriPermission(treeUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-
+                contentResolver.takePersistableUriPermission(
+                    treeUri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
                 val fileDoc = DocumentFile.fromTreeUri(applicationContext, treeUri)
-                
-                for (file: DocumentFile in fileDoc!!.listFiles()) {
+                MyPreference.saveUri(this, treeUri)
+                for (file:DocumentFile in fileDoc!!.listFiles()){
+                     if (file.name!!.matches(Regex("Media"))){
+                         for (it in file.listFiles()){
+                             if (it.name!!.matches(Regex(".Statuses"))){
+                                 for (tt in it.listFiles()){
+                                     if (!tt.name!!.endsWith(".nomedia")){
+                                         MyPreference.setGrant(this)
+                                         logD("path :" + tt.uri.path.toString())
+                                         whatsApplist.add(tt.uri.toString())
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 }
+
+                     //--------------------------------------------
+               /* for (file: DocumentFile in fileDoc!!.listFiles()) {
                     if (!file.name!!.endsWith(".nomedia")) {
                         MyPreference.saveUri(this, treeUri)
                         MyPreference.setGrant(this)
@@ -210,7 +229,7 @@ class Home : BaseActivity<HomeBinding>() {
                         whatsApplist.add(file.uri.toString())
                         // whatsApplist.add(uriStr)
                     }
-                }
+                }*/
                 setRecycler()
             }
         }
@@ -246,14 +265,22 @@ class Home : BaseActivity<HomeBinding>() {
     private fun getFiles() {
         val uriPath = MyPreference.uriString(this)
         if (uriPath != null) {
-            contentResolver.takePersistableUriPermission(
-                Uri.parse(uriPath),
-                Intent.FLAG_GRANT_READ_URI_PERMISSION
-            )
+            logD("path :$uriPath")
+
             val fileDoc = DocumentFile.fromTreeUri(applicationContext, Uri.parse(uriPath))
             for (file: DocumentFile in fileDoc!!.listFiles()) {
-                if (!file.name!!.endsWith(".nomedia")) {
-                    whatsApplist.add(file.uri.toString())
+                if (file.name!!.matches(Regex("Media"))){
+                    for (it in file.listFiles()){
+                        if (it.name!!.matches(Regex(".Statuses"))){
+                            for (tt in it.listFiles()){
+                                if (!tt.name!!.endsWith(".nomedia")){
+                                    MyPreference.setGrant(this)
+                                    logD("path :" + tt.uri.path.toString())
+                                    whatsApplist.add(tt.uri.toString())
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
