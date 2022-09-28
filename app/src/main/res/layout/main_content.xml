@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/first_color">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/first_color"
+            android:elevation="@dimen/x6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/menu_icon">
+
+            <RelativeLayout
+                android:id="@+id/walletLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginEnd="6dp">
+
+                <TextView
+                    android:id="@+id/appName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/app_name"
+                    android:textAlignment="textStart"
+                    android:textColor="#0f1b49"
+                    android:textSize="@dimen/s20"
+                    android:textStyle="italic" />
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x146"
+                    >
+                 <androidx.constraintlayout.widget.ConstraintLayout
+                     android:layout_width="match_parent"
+                     android:background="@drawable/story_from_facebook"
+                     android:layout_height="match_parent">
+                     <ImageView
+                         android:id="@+id/insta_icon"
+                         android:layout_width="@dimen/x48"
+                         android:layout_height="@dimen/x48"
+                         android:layout_marginStart="60dp"
+                         android:src="@drawable/icon_nsta"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
+                         app:layout_constraintTop_toTopOf="parent"
+                          />
+                     <TextView
+                         android:id="@+id/instagram"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/montserrat_regular"
+                         android:text="Instagram"
+                         android:textAllCaps="false"
+                         android:textStyle="bold"
+                         android:textColor="#e32297"
+                         android:textSize="@dimen/s13"
+                         app:layout_constraintEnd_toEndOf="@+id/insta_icon"
+                         app:layout_constraintStart_toStartOf="@+id/insta_icon"
+                         app:layout_constraintTop_toBottomOf="@+id/insta_icon" />
+
+                     <TextView
+                         android:id="@+id/instagramLogInButton"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_centerHorizontal="true"
+                         android:layout_centerVertical="true"
+                         android:background="@drawable/button_border"
+                         android:fontFamily="@font/montserrat_regular"
+                         android:paddingHorizontal="@dimen/x10"
+                         android:paddingVertical="@dimen/x16"
+                         android:text="@string/instagram_Login_text"
+                         android:textAllCaps="false"
+                         android:textColor="#e32297"
+                         android:textSize="15.5sp"
+                         android:visibility="visible"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toEndOf="@+id/insta_icon"
+                         app:layout_constraintTop_toTopOf="parent" />
+
+                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--whatsapp-->
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="160dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/status_card"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_margin="@dimen/x10"
+                        android:elevation="@dimen/x10"
+                        app:cardBackgroundColor="@color/first_color"
+                        android:layout_height="match_parent">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/story"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="@string/whatsapp_stories"
+                                android:textColor="@android:color/white"
+                                android:textSize="11sp"
+                                android:paddingVertical="@dimen/x6"
+                                android:paddingHorizontal="8dp"
+                                android:background="@drawable/bg_story"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/wStatusRv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                tools:listitem="@layout/status_item"
+                                android:padding="@dimen/x10"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/story" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/perCon"
+                        android:background="@drawable/story_from_whatsapp"
+                        android:padding="@dimen/x10"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/instruction"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="@string/wa_line"
+                            android:textColor="@color/text_1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/wa_img"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/enable_bt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/x10"
+                            android:backgroundTint="@color/first_color"
+                            android:text="@string/enable"
+                            android:textColor="#9ce4ba"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/instruction"
+                            app:layout_constraintStart_toStartOf="@+id/instruction"
+                            app:layout_constraintTop_toBottomOf="@+id/instruction" />
+
+                        <ImageView
+                            android:id="@+id/wa_img"
+                            android:layout_width="@dimen/x48"
+                            android:layout_height="@dimen/x48"
+                            android:layout_marginStart="45dp"
+                            android:src="@drawable/icon_whatsapp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/whatsappTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="@string/whatsapp"
+                            android:textColor="@color/first_color"
+                            app:layout_constraintEnd_toEndOf="@+id/wa_img"
+                            app:layout_constraintStart_toStartOf="@+id/wa_img"
+                            app:layout_constraintTop_toBottomOf="@+id/wa_img" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

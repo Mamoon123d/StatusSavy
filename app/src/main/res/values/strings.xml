@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">StatusSavy</string>
+    <string name="wa_line">Please enable Read/Write Storage Permission.</string>
+    <string name="enable">Enable</string>
+    <string name="whatsapp">Whatsapp</string>
+    <string name="whatsapp_stories">Story From Whatsapp</string>
+    <string name="des">Since Android 11,you need to manually allow storage permission.\nPlease click \'Use this folder and than allow\'.</string>
+    <string name="instagram_Login_text">Login Into Instagram</string>
+
+</resources>

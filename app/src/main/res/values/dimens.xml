@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="s20">20sp</dimen>
+    <dimen name="x15">15dp</dimen>
+    <dimen name="x6">6dp</dimen>
+    <dimen name="x0">0dp</dimen>
+    <dimen name="x146">146dp</dimen>
+    <dimen name="x10">10dp</dimen>
+    <dimen name="x48">48dp</dimen>
+    <dimen name="x20">20dp</dimen>
+    <dimen name="s16">16sp</dimen>
+    <dimen name="x100">100dp</dimen>
+    <dimen name="x16">16dp</dimen>
+    <dimen name="s13">13sp</dimen>
+</resources>

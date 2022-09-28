@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Mamoon_s_Project/Project work/Android/Status Saver/app/src/main/res/font/montserrat.xml" value="0.1925925925925926" />
+        <entry key="..\:/Mamoon_s_Project/Project work/Android/Status Saver/app/src/main/res/layout/drawer_header.xml" value="0.18229166666666666" />
+        <entry key="..\:/Mamoon_s_Project/Project work/Android/Status Saver/app/src/main/res/layout/home.xml" value="0.18229166666666666" />
+        <entry key="..\:/Mamoon_s_Project/Project work/Android/Status Saver/app/src/main/res/layout/main_content.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
