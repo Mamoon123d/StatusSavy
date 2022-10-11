@@ -2,13 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.digital.statussavvy">
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-    tools:ignore="ScopedStorage" />
 
-    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
+    <!--<uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />-->
+
     <application
         android:allowBackup="false"
+        android:name=".insta.InstaStoryApplication"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -18,17 +24,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StatusSavy"
         tools:targetApi="31" >
-
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
         <activity android:name=".activity.Home"
             android:theme="@style/Theme.MaterialComponents.NoActionBar"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.OverHome"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+        <activity
+            android:name=".activity.OverHome"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".instagram.LoginActivity">
+
+        </activity>
+        <activity android:name=".activity.StatusActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+            />
+        <activity android:name=".activity.MediaView"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+            />
+        <activity android:name=".FB.DownloadActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+            />
+        <activity android:name=".activity.SavedView"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"
+            />
+        <activity android:name=".activity.WallpaperView"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"
             />
     </application>
 

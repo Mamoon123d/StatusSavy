@@ -6,5 +6,20 @@
     <string name="whatsapp_stories">Story From Whatsapp</string>
     <string name="des">Since Android 11,you need to manually allow storage permission.\nPlease click \'Use this folder and than allow\'.</string>
     <string name="instagram_Login_text">Login Into Instagram</string>
+    <string name="no_net_conn">no internet connection</string>
+    <string name="download_fb_video">Download FB Video</string>
+    <string name="paseyourUrl">Paste Your URL</string>
+    <string name="download">Download</string>
+    <string name="loding">Loading..</string>
+    <string name="close_button">close button</string>
+    <string name="download_instagram_story">Download Instagram Story</string>
+    <string name="zero_percent">0%</string>
+    <string name="downloading_story">Downloading Story</string>
+    <string name="share">Share</string>
+    <string name="oops_exclamation">Oops!</string>
+    <string name="no_users">No data found.</string>
+    <string name="download_tending_wallpapers">Download Wallpapers</string>
+    <string name="download_">Download</string>
+    <string name="save">save</string>
 
 </resources>

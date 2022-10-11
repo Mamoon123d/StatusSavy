@@ -17,4 +17,8 @@
         <item name="cornerSize">50%</item>
         <item name="cornerFamily">rounded</item> <!--possible values are rounded, cut-->
     </style>
+    <style name="curve_style">
+        <item name="cornerSize">10%</item>
+        <item name="cornerFamily">rounded</item> <!--possible values are rounded, cut-->
+    </style>
 </resources>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black">
+        <FrameLayout
+            android:id="@+id/downloadingFramelayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:elevation="@dimen/x15"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/x10"
+                android:layout_marginEnd="@dimen/x10">
+
+                <ProgressBar
+                    android:id="@+id/downloadProgresBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/downloadPercentage"
+                    android:layout_marginTop="@dimen/x12"
+                    android:progressDrawable="@drawable/download_progress" />
+
+                <TextView
+                    android:id="@+id/downloadPercentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView"
+                    android:layout_marginTop="@dimen/x12"
+                    android:fontFamily="@font/ubuntu_bold"
+                    android:text="@string/zero_percent"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/s20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/ubuntu_bold"
+                    android:text="@string/downloading_story"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/s17" />
+
+                <TextView
+                    android:id="@+id/textViewProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/downloadProgresBar"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ubuntu_bold"
+                    android:textSize="@dimen/s20" />
+            </RelativeLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/actionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="@dimen/x10"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="2dp"
+            android:background="@android:color/black"
+            app:layout_constraintBottom_toTopOf="@+id/bannerAdContainer"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginTop="@dimen/x20">
+
+            <LinearLayout
+                android:id="@+id/actions"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp"
+                android:elevation="70dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/reverse"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+                <View
+                    android:id="@+id/center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6" />
+
+                <View
+                    android:id="@+id/skip"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@android:color/darker_gray"
+                app:cardCornerRadius="5dp">
+
+                <ImageView
+                    android:id="@+id/statusImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:id="@+id/usernamelinear"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_above="@+id/video_view"
+                    android:layout_marginTop="15dp"
+                    android:elevation="5dp"
+                    android:gravity="left|center_vertical|center_horizontal|center|start"
+                    android:paddingStart="@dimen/x15"
+                    android:paddingTop="@dimen/x10"
+                    android:paddingEnd="@dimen/x15">
+
+                    <TextView
+                        android:id="@+id/userName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:shadowColor="@android:color/black"
+                        android:shadowRadius="5"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/s10"
+                        android:textStyle="bold" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/profile" />
+                </LinearLayout>
+
+
+                <ProgressBar
+                    android:id="@+id/progressbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <com.google.android.exoplayer2.ui.PlayerView
+                    android:id="@+id/video_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/black"
+                    android:visibility="gone"
+                    app:shutter_background_color="@android:color/darker_gray"
+                    app:use_controller="false" />
+
+                <!--<com.lijiankun24.shadowlayout.ShadowLayout
+                    android:id="@+id/shadow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="@dimen/x5"
+                    android:layout_marginTop="@dimen/x6"
+                    android:layout_marginEnd="@dimen/x5"
+                    app:shadowColor="#cd929090"
+                    app:shadowDx="0dp"
+                    app:shadowDy="0dp"
+                    app:shadowRadius="5dp"
+                    app:shadowShape="oval"
+                    app:shadowSide="all">
+
+
+                </com.lijiankun24.shadowlayout.ShadowLayout>-->
+                <com.digital.statussavvy.utils.StoryStatusView
+                    android:id="@+id/storiesStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:elevation="5dp" />
+                <LinearLayout
+                    android:id="@+id/layoutdownload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="2">
+
+                    <Button
+                        android:id="@+id/shareButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_green_background"
+                        android:drawableStart="@drawable/share_icon"
+                        android:drawableLeft="@drawable/share_icon"
+                        android:text="@string/share"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/downloadButton"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_green_background"
+                        android:drawableStart="@drawable/download_icon"
+                        android:drawableLeft="@drawable/download_icon"
+                        android:text="@string/download"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!--            <include-->
+                <!--                android:id="@+id/native_ad_container"-->
+                <!--                layout="@layout/story_saver_native_ad_unit"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:paddingBottom="5dp"-->
+                <!--                android:visibility="gone" />-->
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/bannerAdContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:minHeight="100dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

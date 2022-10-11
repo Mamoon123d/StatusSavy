@@ -8,5 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="first_color">#ffffff</color>
+    <color name="second_color">#141313</color>
     <color name="text_1">#535252</color>
+    <color name="text_2">@color/first_color</color>
+    <color name="third_color">#ffb954</color>
+    <color name="text_3">#151435</color>
+    <color name="gnt_black">#000000</color>
 </resources>

@@ -6,7 +6,7 @@ import android.content.Context
 import android.os.Handler
 import android.os.Message
 import android.util.Log
-import com.digital.statussavvy.instaApp.InstagramDialog.OAuthDialogListener
+import com.digital.statussavvy.instaApp.InstagramDialog2.OAuthDialogListener
 import org.json.JSONObject
 import org.json.JSONTokener
 import java.io.*
@@ -14,20 +14,18 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 
-class InstagramApp() {
+public class InstagramApp() {
 
     private var mSession: InstagramSession? = null
-    private var mDialog: InstagramDialog? = null
+    private var mDialog: InstagramDialog2? = null
     private var mListener: OAuthAuthenticationListener? = null
     private var mProgress: ProgressDialog? = null
     private var mAuthUrl: String? = null
     private var mTokenUrl: String? = null
     private var mAccessToken: String? = null
     private var mCtx: Context? = null
-
     private var mClientId: String? = null
     private var mClientSecret: String? = null
-
 
     private val WHAT_FINALIZE = 0
     private val WHAT_ERROR = 1
@@ -37,9 +35,11 @@ class InstagramApp() {
      * Callback url, as set in 'Manage OAuth Costumers' page
      * (https://developer.github.com/)
      */
-    companion object{
-        var mCallbackUrl = ""
 
+    companion object{
+
+
+        lateinit var mCallbackUrl: String
     }
     private val AUTH_URL = "https://api.instagram.com/oauth/authorize/"
     private val TOKEN_URL = "https://api.instagram.com/oauth/access_token"
@@ -60,6 +60,7 @@ class InstagramApp() {
         mCallbackUrl = callbackUrl
         mTokenUrl = (TOKEN_URL + "?client_id=" + clientId + "&client_secret="
                 + clientSecret + "&redirect_uri=" + mCallbackUrl + "&grant_type=authorization_code")
+
         mAuthUrl = (AUTH_URL + "?client_id=" + clientId + "&redirect_uri="
                 + mCallbackUrl + "&response_type=code&display=touch&scope=likes+comments+relationships")
         val listener: OAuthDialogListener = object : OAuthDialogListener {
@@ -71,7 +72,7 @@ class InstagramApp() {
                 mListener!!.onFail("Authorization failed")
             }
         }
-        mDialog = InstagramDialog(context, mAuthUrl!!, listener)
+        mDialog = InstagramDialog2(context," mAuthUrl!!", listener)
         mProgress = ProgressDialog(context)
         mProgress!!.setCancelable(false)
     }
@@ -147,6 +148,7 @@ class InstagramApp() {
                 mHandler.sendMessage(mHandler.obtainMessage(what, 2, 0))
             }
         }.start()
+
     }
 
 
@@ -192,6 +194,7 @@ class InstagramApp() {
         //Intent webAuthIntent = new Intent(Intent.ACTION_VIEW);
         //webAuthIntent.setData(Uri.parse(AUTH_URL));
         //mCtx.startActivity(webAuthIntent);
+        if (mDialog!=null)
         mDialog!!.show()
     }
 

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="119dp"
+            android:layout_height="45dp"
+            android:background="@drawable/card_view_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Downloaded"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/s20"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintTop_toTopOf="@+id/view" />
+
+        <FrameLayout
+            android:id="@+id/closeBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                app:cardBackgroundColor="@color/gnt_black"
+                app:cardCornerRadius="18dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/ic_close" />
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/bannerAdContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:minHeight="100dp"
+            android:orientation="vertical"
+            android:paddingTop="1dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/downloadRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_above="@+id/bannerAdContainer"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="1dp"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/bannerAdContainer"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <include layout="@layout/layout_no_data">
+
+        </include>
+
+        <!--    <com.google.android.material.appbar.AppBarLayout-->
+        <!--        android:id="@+id/appBarLayout"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:fitsSystemWindows="true"-->
+        <!--        android:theme="@style/AppTheme.AppBarOverlay"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+        <!--        <androidx.appcompat.widget.Toolbar-->
+        <!--            android:id="@+id/toolbar"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@android:color/white">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/title"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="@dimen/header_text_margin"-->
+        <!--                android:layout_marginLeft="@dimen/header_text_margin"-->
+        <!--                android:layout_marginTop="@dimen/header_text_margin"-->
+        <!--                android:fontFamily="@font/montserrat_bold"-->
+        <!--                android:text="Downloaded"-->
+        <!--                android:textAllCaps="true"-->
+        <!--                android:textColor="#0f1b49"-->
+        <!--                android:textSize="@dimen/header_title_size"-->
+        <!--                android:textStyle="italic" />-->
+        <!--        </androidx.appcompat.widget.Toolbar>-->
+        <!--    </com.google.android.material.appbar.AppBarLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

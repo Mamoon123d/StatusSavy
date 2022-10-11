@@ -12,4 +12,13 @@
     <dimen name="x100">100dp</dimen>
     <dimen name="x16">16dp</dimen>
     <dimen name="s13">13sp</dimen>
+    <dimen name="x30">30dp</dimen>
+    <dimen name="x60">60dp</dimen>
+    <dimen name="s12">12sp</dimen>
+    <dimen name="x12">12dp</dimen>
+    <dimen name="s17">17sp</dimen>
+    <dimen name="x5">5dp</dimen>
+    <dimen name="s10">10sp</dimen>
+    <dimen name="x200">200dp</dimen>
+    <dimen name="x140">140dp</dimen>
 </resources>

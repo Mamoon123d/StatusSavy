@@ -25,20 +25,22 @@ import android.widget.TextView
  * @author Thiago Locatelli <thiago.locatelli></thiago.locatelli>@gmail.com>
  * @author Lorensius W. L T <lorenz></lorenz>@londatiga.net>
  */
-class InstagramDialog(
+public class InstagramDialog(
     context: Context?, private val mUrl: String,
-    private val mListener: OAuthDialogListener
+    private val mListener: InstagramDialog2.OAuthDialogListener?
 ) : Dialog(context!!) {
-    private var mSpinner: ProgressDialog? = null
+  /*  private var mSpinner: ProgressDialog? = null
     private var mWebView: WebView? = null
     private var mContent: LinearLayout? = null
     private var mTitle: TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle) {
         super.onCreate(savedInstanceState)
-        mSpinner = ProgressDialog(context)
         mSpinner!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         mSpinner!!.setMessage("Loading...")
         mContent = LinearLayout(context)
+        mSpinner = ProgressDialog(context)
+
         mContent!!.orientation = LinearLayout.VERTICAL
         setUpTitle()
         setUpWebView()
@@ -136,5 +138,5 @@ class InstagramDialog(
         const val MARGIN = 4
         const val PADDING = 2
         private const val TAG = "Instagram-WebView"
-    }
+    }*/
 }
