@@ -3,14 +3,8 @@ package com.digital.statussavvy.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
-
-import androidx.documentfile.provider.DocumentFile;
-
-import java.io.File;
-import java.util.ArrayList;
 
 
 public class MyPreference {
@@ -29,15 +23,27 @@ public class MyPreference {
         e.apply();
         e.commit();
     }
- public static String uriString(Context c){
-        return getPreference(c).getString("urlPath","");
- }
+
+    public static String uriString(Context c) {
+        return getPreference(c).getString("urlPath", "");
+    }
 
     public static void setGrant(Context c) {
         SharedPreferences.Editor e = editPreference(c);
         e.putBoolean("isGrant", true);
         e.apply();
         e.commit();
+    }
+
+    public static void setChange(Context c, boolean isChange) {
+        SharedPreferences.Editor e = editPreference(c);
+        e.putBoolean("isChange", isChange);
+        e.apply();
+        e.commit();
+    }
+
+    public static Boolean isChanged(Context c) {
+        return getPreference(c).getBoolean("isChange", false);
     }
 
     public static Boolean isGranted(Context c) {
@@ -56,7 +62,7 @@ public class MyPreference {
         }
     }
 
-    public ArrayList<File> getUriList(Context c) {
+    /*public ArrayList<File> getUriList(Context c) {
         Uri uri = getUri(c);
         ArrayList<File> list = new ArrayList<>();
         if (uri != null) {
@@ -66,19 +72,33 @@ public class MyPreference {
                 DocumentFile[] documentFiles = fromTreeUri.listFiles();
 
 
-               /* for (int i = 0; i < documentFiles.length; i++) {
+               *//* for (int i = 0; i < documentFiles.length; i++) {
                     documentFiles[i].getUri().toString() //uri of the document
-                }*/
+                }*//*
                 for (DocumentFile file : documentFiles) {
                     //list.add("")
                 }
             }
         }
         return list;
+    }*/
+    public static String getUserId(Context context) {
+        return getPreference(context).getString(DataSet.User.USER_ID, "-1");
     }
 
+    public static String getSecurityToken(Context context) {
+        return getPreference(context).getString(DataSet.User.SECURITY_TOKEN, "");
+    }
 
+    public static void saveData(Context context, String userId, String securityToken) {
+        SharedPreferences.Editor e = editPreference(context);
+        e.putString(DataSet.User.USER_ID, userId);
+        e.putString(DataSet.User.SECURITY_TOKEN, securityToken);
+        //  e.putBoolean(LoginActivity.prefInstallReferrer, true);
+        e.apply();
+        e.commit();
 
+    }
 
 
 }

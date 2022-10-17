@@ -21,4 +21,6 @@
     <dimen name="s10">10sp</dimen>
     <dimen name="x200">200dp</dimen>
     <dimen name="x140">140dp</dimen>
+    <dimen name="x35">35dp</dimen>
+    <dimen name="x40">40dp</dimen>
 </resources>

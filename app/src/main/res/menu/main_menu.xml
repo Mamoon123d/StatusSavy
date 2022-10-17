@@ -2,6 +2,42 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/download_item"
-        android:title="Downloads" />
+        android:icon="@drawable/download_icon"
+        android:title="@string/download_" />
 
+    <item
+        android:id="@+id/nav_privacyPolicy"
+        android:icon="@drawable/ic_privacy"
+        android:title="@string/privacy_policy" />
+    <item
+        android:id="@+id/nav_contact_us"
+        android:icon="@drawable/ic_contact_us"
+        android:title="@string/contact_us" />
+
+    <group
+        android:id="@+id/grp_4"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/nav_telegram"
+            android:icon="@drawable/ic_telegram"
+            android:title="@string/join_us_on_telegram" />
+        <item
+            android:id="@+id/nav_facebook"
+            android:icon="@drawable/ic_facebook"
+            android:title="@string/like_us_on_facebook" />
+        <item
+            android:id="@+id/nav_twitter"
+            android:icon="@drawable/ic_twitter"
+            android:title="@string/follow_us_on_twitter" />
+        <item
+            android:id="@+id/nav_instagram"
+            android:icon="@drawable/ic_instagram"
+            android:title="@string/follow_us_on_instagram" />
+        <item
+            android:id="@+id/nav_youtube"
+            android:icon="@drawable/ic_youtube"
+            android:title="@string/subscribe_on_youtube" />
+
+    </group>
 </menu>

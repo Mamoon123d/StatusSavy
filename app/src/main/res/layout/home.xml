@@ -6,7 +6,7 @@
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="false"
+        android:fitsSystemWindows="true"
         tools:context=".activity.HomeActivity"
         tools:openDrawer="start">
 
@@ -19,7 +19,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
+            android:layout_marginEnd="@dimen/x35"
+            android:background="@color/first_color"
             app:itemIconTint="@color/text_3"
+            app:itemTextColor="@color/text_3"
             app:menu="@menu/main_menu"
             android:fitsSystemWindows="true" />
     </androidx.drawerlayout.widget.DrawerLayout>

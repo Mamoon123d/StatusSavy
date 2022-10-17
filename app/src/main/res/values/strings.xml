@@ -21,5 +21,36 @@
     <string name="download_tending_wallpapers">Download Wallpapers</string>
     <string name="download_">Download</string>
     <string name="save">save</string>
+    <string name="whatsapp_status">WhatsApp Statuses</string>
+    <string name="trending_wallpapers">Trending Wallpapers</string>
+    <string name="view_all">view all</string>
+    <string name="gallery">Gallery</string>
+
+    <string name="join_us_on_telegram">Join Us On Telegram</string>
+    <string name="like_us_on_facebook">Like us on Facebook</string>
+    <string name="follow_us_on_twitter">Follow us on Twitter</string>
+    <string name="follow_us_on_instagram">Follow us on Instagram</string>
+    <string name="subscribe_on_youtube">Subscribe on Youtube</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="accept">Accept</string>
+
+    <string name="facebook_link">https://www.facebook.com/gamersanjuyt</string>
+    <string name="twitter_link">https://twitter.com/mobcandyapp</string>
+    <string name="instagram_link">https://www.instagram.com/cashleyapp/</string>
+    <string name="youtube_link">https://www.youtube.com/channel/UCLV_ZFqTH9l4zx8VFZ-Xjqw</string>
+    <string name="telegram_link">https://t.me/EarnMoreEarnBig</string>
+    <string name="guid_line">Login to watch status from Whatsapp, Facebook, Instagram and earn money.</string>
+    <string name="google">Google</string>
+    <string name="by_continuing">By Continuing you agree to our</string>
+    <string name="terms_underline"><u>Terms &amp; Conditions</u></string>
+    <string name="privacy_underline"><u>Privacy Policy</u></string>
+    <string name="and">and</string>
+    <string name="saving_stories">Saving stories</string>
+
+    <string name="new_version_available">New Version Available</string>
+    <string name="update_instruction">Please update to get the latest features and best experience.</string>
+    <string name="update_now">Update Now</string>
+
 
 </resources>

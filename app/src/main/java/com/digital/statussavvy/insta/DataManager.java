@@ -32,7 +32,10 @@ public class DataManager {
         }
 
         public Response intercept(Chain chain) throws IOException {
-            return chain.proceed(newBuilder(chain).headers(Headers.of(DataManager.this.mHeaders)).build());
+            return chain.proceed(
+                    newBuilder(chain)
+                    .headers(Headers.of(mHeaders))
+                    .build());
         }
 
         private Request.Builder newBuilder(Chain chain) {

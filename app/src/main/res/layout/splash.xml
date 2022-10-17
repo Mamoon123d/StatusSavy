@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/first_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="UselessParent">
+
+
+                <ImageView
+                    android:id="@+id/video"
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="160dp"
+                    android:src="@drawable/app_logo"/>
+
+
+
+                <TextView
+                    android:layout_marginStart="@dimen/x10"
+                    android:layout_marginTop="45dp"
+                    android:id="@+id/mainTv"
+                    android:layout_toEndOf="@+id/video"
+                    android:layout_width="wrap_content"
+                    android:textAllCaps="true"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/app_name"
+                    android:textSize="25sp">
+
+                </TextView>
+
+                <TextView
+                    android:textAllCaps="true"
+                    android:layout_marginStart="@dimen/x10"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_below="@+id/mainTv"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/saving_stories"
+                    android:textSize="14sp">
+
+                </TextView>
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Large.ThreeBounce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="50dp"
+            app:SpinKit_Color="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

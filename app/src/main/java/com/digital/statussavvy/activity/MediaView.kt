@@ -1,7 +1,6 @@
 package com.digital.statussavvy.activity
 
-import android.content.ContentValues
-import android.content.Intent
+import android.content.*
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.net.Uri
@@ -9,23 +8,35 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.OpenableColumns
+import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import androidx.viewpager2.widget.ViewPager2
 import com.digital.statussavvy.R
 import com.digital.statussavvy.adapter.MediaAdapter
-import com.digital.statussavvy.databinding.WaStatusViewBinding
+import com.digital.statussavvy.databinding.MediaViewBinding
 import com.digital.statussavvy.utils.Constent
 import com.digital.statussavvy.utils.DataSet
+import com.digital.statussavvy.utils.FileManager
+import com.digital.statussavvy.utils.MyPreference
 import com.moon.baselibrary.base.BaseActivity
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
+import java.util.*
 
-class MediaView : BaseActivity<WaStatusViewBinding>() {
+class MediaView : BaseActivity<MediaViewBinding>() {
+    private var position_: Int? = null
+    private lateinit var adapter: MediaAdapter
     private lateinit var uriPath: String
     public var list = mutableListOf<String>()
     override fun setLayoutId(): Int {
-        return R.layout.wa_status_view
+        return R.layout.media_view
     }
 
     override fun initM() {
@@ -33,13 +44,31 @@ class MediaView : BaseActivity<WaStatusViewBinding>() {
     }
 
     private fun setWaStatus() {
-
+        val shareBt = binding.shareE
+        val container = binding.con1
+        val deleteBt = binding.deleteBt
         val type = intent.getByteExtra(DataSet.Type.TYPE, -1)
         val pos = intent.getIntExtra(DataSet.POSITION, -1)
         if (type == DataSet.Type.DIRECT_STATUS) {
             list = Home.whatsApplist
         } else if (type == DataSet.Type.SAVED_STATUS) {
             list = SavedView.savedWaList
+            container.visibility = View.GONE
+            shareBt.visibility = View.VISIBLE
+            deleteBt.visibility = View.VISIBLE
+        } else if (type == DataSet.Type.SAVED_WALLPAPERS) {
+            container.visibility = View.GONE
+            shareBt.visibility = View.VISIBLE
+            list = SavedView.savedWallpaperList
+            deleteBt.visibility = View.VISIBLE
+
+        } else if (type == DataSet.Type.WALLPAPERS) {
+           // list = Home.wallpaperlist
+        } else if (type == DataSet.Type.SAVED_INSTA) {
+            container.visibility = View.GONE
+            shareBt.visibility = View.VISIBLE
+            deleteBt.visibility = View.VISIBLE
+            list = SavedView.instaStatusList
         }
         uriPath = list[pos]
         //val photo = binding.photo
@@ -56,18 +85,28 @@ class MediaView : BaseActivity<WaStatusViewBinding>() {
          }*/
 
         val vp = binding.vp
-        vp.adapter = MediaAdapter(this, list)
+        adapter = MediaAdapter(this, list)
+        vp.adapter = adapter
         vp.setCurrentItem(pos, false)
+        position_ = pos
+        vp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                position_ = position
+            }
+        })
+
         binding.save.setOnClickListener {
-            save(uriPath)
+            save(list[position_!!])
         }
         binding.share.setOnClickListener {
             val sharingIntent = Intent(Intent.ACTION_SEND)
+            uriPath = list[position_!!]
             val imagetUri = Uri.parse(uriPath)
             if (uriPath.endsWith(".mp4"))
                 sharingIntent.type = "video/mp4"
             else sharingIntent.type = "image/jpeg"
-            if (Build.VERSION.SDK_INT >= 24 && type == DataSet.Type.SAVED_STATUS) {
+            if (Build.VERSION.SDK_INT >= 24 && type != DataSet.Type.DIRECT_STATUS) {
                 val photoURI = FileProvider.getUriForFile(
                     this,
                     this.applicationContext.packageName + ".provider",
@@ -79,7 +118,100 @@ class MediaView : BaseActivity<WaStatusViewBinding>() {
             }
             startActivity(Intent.createChooser(sharingIntent, "Share image using"))
         }
+        shareBt.setOnClickListener {
+            val sharingIntent = Intent(Intent.ACTION_SEND)
+            uriPath = list[position_!!]
+            val imagetUri = Uri.parse(uriPath)
+            if (uriPath.endsWith(".mp4"))
+                sharingIntent.type = "video/mp4"
+            else sharingIntent.type =
+                if (type == DataSet.Type.SAVED_WALLPAPERS) "image/jpg" else "image/jpeg"
+            if (Build.VERSION.SDK_INT >= 24 && type != DataSet.Type.DIRECT_STATUS) {
+                val photoURI = FileProvider.getUriForFile(
+                    this,
+                    this.applicationContext.packageName + ".provider",
+                    File(imagetUri.path)
+                )
+                sharingIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
+            } else {
+                sharingIntent.putExtra(Intent.EXTRA_STREAM, imagetUri);
+            }
+            startActivity(Intent.createChooser(sharingIntent, "Share image using"))
+        }
+        deleteBt.setOnClickListener {
+            deleteFile_(list[position_!!])
+        }
+    }
 
+    private fun deleteFile_(uri: String) {
+        val uri_ = FileManager.getContentUriId(this, Uri.parse(uri))
+        if (!uri.endsWith(".mp4")) {  //1.file uri->content uri
+            try {
+                deleteAPI28(uri_, this)
+
+            } catch (e: Exception) {
+                try {
+                    deleteAPI30(uri_)
+                } catch (e: IntentSender.SendIntentException) {
+                    e.printStackTrace()
+                }
+            }
+        } else {
+            val uri_v = Uri.parse(uri)
+            val file = File(uri_.path)
+
+            val path =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                    .toString() + Constent.SavePath + getFileName(Uri.parse(uri))
+            val isDelete = File(path).delete()
+            if (isDelete) {
+                showMsg("file deleted")
+            }
+        }
+
+        if (list != null) {
+            list.remove(list[position_!!])
+            adapter.notifyItemRemoved(position_!!)
+            //adapter.removeItem(position_!! )
+            // adapter.notifyDataSetChanged()
+            MyPreference.setChange(this, true)
+        }
+
+        if (list.size == 0) {
+            finish()
+        }
+
+    }
+
+    private fun deleteAPI30(uri_: Uri) {
+        val contentResolver: ContentResolver = this.contentResolver
+        // API 30
+
+        // API 30
+        val uriList: ArrayList<Uri> = ArrayList()
+        Collections.addAll(uriList, uri_)
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            MediaStore.createDeleteRequest(contentResolver, uriList)
+        } else {
+            TODO("VERSION.SDK_INT < R")
+        }
+        val senderRequest = IntentSenderRequest.Builder(pendingIntent.intentSender)
+            .setFillInIntent(null)
+            .setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION, 0)
+            .build()
+        deleteResultLauncher.launch(senderRequest)
+        /*   startIntentSenderForResult(
+               pendingIntent.intentSender,
+               DELETE_REQUEST_CODE, null, 0,
+               0, 0, null
+           )*/
+    }
+
+    fun deleteAPI28(uri: Uri?, context: Context): Int {
+        val resolver = context.contentResolver
+        val del = resolver.delete(uri!!, null, null)
+        showMsg("deleted file")
+        return del
     }
 
     private fun save(uri: String) {
@@ -198,4 +330,15 @@ class MediaView : BaseActivity<WaStatusViewBinding>() {
         }
         return result
     }
+
+    var deleteResultLauncher: ActivityResultLauncher<IntentSenderRequest> =
+        registerForActivityResult(
+            ActivityResultContracts.StartIntentSenderForResult(),
+            ActivityResultCallback<ActivityResult> { result ->
+                if (result.getResultCode() === RESULT_OK) {
+                    showMsg("delete file")
+                }
+            }
+        )
+
 }

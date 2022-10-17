@@ -2,6 +2,8 @@ package com.digital.statussavvy.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.ActivityNotFoundException
 import android.content.ContentValues.TAG
@@ -17,24 +19,33 @@ import android.os.storage.StorageManager
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import androidx.core.view.GravityCompat
 import androidx.documentfile.provider.DocumentFile
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ashudevs.facebookurlextractor.FacebookExtractor
 import com.ashudevs.facebookurlextractor.FacebookFile
-import com.digital.statussavvy.FB.DownloadActivity
 import com.digital.statussavvy.NotificationHelper
 import com.digital.statussavvy.R
 import com.digital.statussavvy.adapter.InstaStoryAdapter
 import com.digital.statussavvy.adapter.StatusAdapter
 import com.digital.statussavvy.adapter.WallPaperAdapter
+import com.digital.statussavvy.data.ScreensData
 import com.digital.statussavvy.databinding.HomeBinding
 import com.digital.statussavvy.insta.*
+import com.digital.statussavvy.network.ApiClient
+import com.digital.statussavvy.network.ApiRequest
+import com.digital.statussavvy.network.NetworkHelper
 import com.digital.statussavvy.utils.DataSet
 import com.digital.statussavvy.utils.MyPreference
 import com.downloader.*
@@ -52,6 +63,8 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import rx.Subscription
 import java.io.File
@@ -60,12 +73,13 @@ import java.text.DecimalFormat
 
 class Home : BaseActivity<HomeBinding>(), OnLogInListner {
     private lateinit var progressDialog2: ProgressDialog
-    var dataManager: DataManager = DataManager()
+    lateinit var dataManager: DataManager
     var subscription: Subscription? = null
     var instagramStatusList = java.util.ArrayList<InstaStatusDetails>()
 
     companion object {
         var whatsApplist = mutableListOf<String>()
+        var wallpaperlist = listOf<ScreensData.Wallpaper>()
         fun readableFileSize(j: Long): String? {
             if (j <= 0) {
                 return "0"
@@ -99,23 +113,47 @@ class Home : BaseActivity<HomeBinding>(), OnLogInListner {
 
     private fun setTrending() {
         val rv = binding.main.trendRv
-        val list = listOf<String>(
-            "https://images.pexels.com/photos/4238351/pexels-photo-4238351.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-            "https://images.pexels.com/photos/4238351/pexels-photo-4238351.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-            "https://images.pexels.com/photos/4238351/pexels-photo-4238351.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-            "https://images.pexels.com/photos/4238351/pexels-photo-4238351.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-            "https://images.pexels.com/photos/4238351/pexels-photo-4238351.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-        )
-        val adapter = WallPaperAdapter(this, list)
-        rv.adapter = adapter
-        rv.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        adapter.setOnItemClickListener(object : BaseRvAdapter.OnItemClickListener {
-            override fun onItemClick(v: View?, position: Int) {
-                val b = Bundle()
-                b.putByte(DataSet.Type.TYPE, DataSet.Type.WALLPAPERS)
-                goActivity(MediaView(), b)
-            }
-        })
+        val isNetwork = NetworkHelper.isNetworkAvailable(this)
+        if (isNetwork) {
+            val call = ApiClient.getApi().getScreens(ApiRequest.createRequest(this))
+            call.enqueue(object : Callback<ScreensData> {
+                override fun onResponse(call: Call<ScreensData>, response: Response<ScreensData>) {
+                    if (response.isSuccessful) {
+                        val data = response.body()
+                        if (data != null) {
+                            wallpaperlist = data.wallpaperList
+
+                            val adapter = WallPaperAdapter(this@Home, wallpaperlist)
+                            rv.adapter = adapter
+                            rv.layoutManager =
+                                LinearLayoutManager(this@Home, RecyclerView.HORIZONTAL, false)
+                            adapter.setOnItemClickListener(object :
+                                BaseRvAdapter.OnItemClickListener {
+                                override fun onItemClick(v: View?, position: Int) {
+                                    val b = Bundle()
+                                    b.putByte(DataSet.Type.TYPE, DataSet.Type.WALLPAPERS)
+                                    b.putInt(DataSet.POSITION, position)
+                                    goActivity(WallpaperView(), b)
+                                }
+                            })
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ScreensData>, t: Throwable) {
+                }
+
+            })
+        } else Toast.makeText(this, "Network Not Available", Toast.LENGTH_SHORT).show()
+
+        /* wallpaperlist = listOf<String>(
+             "https://images.pexels.com/photos/4238351/pexels-photo-4238351.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+             "https://images.pexels.com/photos/4238351/pexels-photo-4238351.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+             "https://images.pexels.com/photos/4238351/pexels-photo-4238351.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+             "https://images.pexels.com/photos/4238351/pexels-photo-4238351.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+             "https://images.pexels.com/photos/4238351/pexels-photo-4238351.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+         ) as MutableList<String>*/
+
     }
 
     private fun setFacebookDownloader() {
@@ -148,6 +186,8 @@ class Home : BaseActivity<HomeBinding>(), OnLogInListner {
                     }
 
                 }
+            } else {
+                showMsg("Paste FB Video Url")
             }
 
         }
@@ -246,35 +286,9 @@ class Home : BaseActivity<HomeBinding>(), OnLogInListner {
     }
 
     private fun setInstagramStatus() {
-        /* val insta = InstagramApp(
-             Home@ this,
-             DataSet.Instagram.CLIENT_ID,
-             DataSet.Instagram.CLIENT_SECRET,
-             DataSet.Instagram.CALLBACK_URL
-         )*/
-
-        /*  val listener = object : InstagramApp.OAuthAuthenticationListener {
-              override fun onSuccess() {
-                  logE("Userid :", insta.getId())
-                  logE("Name :", insta.getName())
-                  logE("UserName :", insta.getUserName())
-              }
-
-              override fun onFail(error: String?) {
-                  showMsg(error + "")
-              }
-
-
-          }
-          insta.setListener(listener)*/
-        dataManager.setHeaders(
-            Headers.Client.add(
-                false,
-                "Cookie",
-                InstaStoryApplication.getInstance().cookieManager.cookie
-            )
-        )
-        if (dataManager.mHeaders != null) {
+        dataManager = DataManager()
+        if (dataManager != null && InstaStoryApplication.getInstance().cookieManager.cookie != null) {
+            //  dataManager.setHeaders(Headers.Client.add(false, "Cookie", InstaStoryApplication.getInstance().cookieManager.cookie!!))
             getInstagramStatus()
         }
         ShowInstagramStatus()
@@ -325,6 +339,17 @@ class Home : BaseActivity<HomeBinding>(), OnLogInListner {
         binding.main.download.setOnClickListener {
             goActivity(SavedView())
         }
+        binding.main.wViewAll.setOnClickListener {
+            val b = Bundle()
+            b.putByte(DataSet.Type.TYPE, DataSet.Type.DIRECT_STATUS)
+            goActivity(AllView(), b)
+        }
+        binding.main.wallpaperViewAll.setOnClickListener {
+            val b = Bundle()
+            b.putByte(DataSet.Type.TYPE, DataSet.Type.WALLPAPERS)
+            goActivity(AllView(), b)
+        }
+
     }
 
     fun isStoragePermissionGranted(): Boolean {
@@ -482,9 +507,9 @@ class Home : BaseActivity<HomeBinding>(), OnLogInListner {
                         if (file.name!!.matches(Regex("Media"))) {
                             for (it in file.listFiles()) {
                                 if (it.name!!.matches(Regex(".Statuses"))) {
+                                    MyPreference.setGrant(this)
                                     for (tt in it.listFiles()) {
                                         if (!tt.name!!.endsWith(".nomedia")) {
-                                            MyPreference.setGrant(this)
                                             logD("path :" + tt.uri.path.toString())
                                             whatsApplist.add(tt.uri.toString())
                                         }
@@ -652,24 +677,93 @@ class Home : BaseActivity<HomeBinding>(), OnLogInListner {
         val toolbar = binding.main.toolbar
         val drawerLayout = binding.drawerLayout
         setSupportActionBar(toolbar)
-        //val actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, 0, 0)
-        // actionBarDrawerToggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, 0, 0)
+        //  drawerLayout.setDrawerListener(actionBarDrawerToggle)
+        //  actionBarDrawerToggle.syncState()
+        //  val drawable =getDrawable(R.drawable.menu_icon)
+        //  actionBarDrawerToggle.isDrawerIndicatorEnabled=false
+        // actionBarDrawerToggle.setHomeAsUpIndicator(drawable)
+        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //  supportActionBar?.setHomeAsUpIndicator(R.drawable.menu_icon)
+
         val nav = binding.navigation
         nav.setNavigationItemSelectedListener(object : OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when (item.itemId) {
                     R.id.download_item -> {
                         drawerLayout.closeDrawers()
-                        goActivity(DownloadActivity())
+                        goActivity(SavedView())
                     }
+                    R.id.nav_privacyPolicy -> {
+                        drawerLayout.closeDrawers()
+                        setPrivacy(
+                            getString(R.string.privacy_policy),
+                            "https://statussavvy.app/privacy-policy.html"
+                        )
+                    }
+                    R.id.nav_telegram -> {
+                        drawerLayout.closeDrawers()
+                        followUs(getString(R.string.telegram_link))
+                    }
+                    R.id.nav_instagram -> {
+                        drawerLayout.closeDrawers()
+                        followUs(getString(R.string.instagram_link))
+                    }
+                    R.id.nav_twitter -> {
+                        drawerLayout.closeDrawers()
+                        followUs(getString(R.string.twitter_link))
+                    }
+                    R.id.nav_facebook -> {
+                        drawerLayout.closeDrawers()
+                        followUs(getString(R.string.facebook_link))
+                    }
+                    R.id.nav_youtube -> {
+                        drawerLayout.closeDrawers()
+                        followUs(getString(R.string.youtube_link))
+                    }
+
                 }
                 return true
             }
 
         })
-
+        binding.main.menu.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
     }
+
+    open fun followUs(urlLink: String?) {
+        this.startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(urlLink)))
+    }
+
+    private fun setPrivacy(title: String, url: String) {
+        val dialog = Dialog(this)
+        // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.privacy_dialog)
+        dialog.window!!.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(false)
+        val title_tv = dialog.findViewById<TextView>(R.id.p_dialog_title)
+        val webView = dialog.findViewById<WebView>(R.id.policy_wev)
+        val accept_bt = dialog.findViewById<TextView>(R.id.done_bt)
+        webView.loadUrl(url)
+        webView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                view.loadUrl(url)
+                return true
+            }
+        }
+        title_tv.text = title
+        accept_bt.setOnClickListener { v: View? -> dialog.dismiss() }
+        if (!(this as Activity).isFinishing) {
+            //show dialog
+            dialog.show()
+        }
+    }
+
 
     override fun onLogIn(str: String?) {
         if (str == OnLogInListner.Instagram) {
@@ -683,23 +777,27 @@ class Home : BaseActivity<HomeBinding>(), OnLogInListner {
     private fun getInstagramStatus() {
         binding.main.instaLoginCon.visibility = View.GONE
         binding.main.instaStoryCard.visibility = View.VISIBLE
-        if (dataManager.mHeaders != null) {
+        if (dataManager != null) {
             dataManager.setHeaders(
                 Headers.Client.add(
                     false,
                     "Cookie",
-                    InstaStoryApplication.getInstance().getCookieManager().getCookie()
+                    InstaStoryApplication.getInstance().cookieManager.cookie
                 )
             )
         }
         // val subscription2: Subscription = subscription!!
         if (subscription != null) {
             subscription!!.unsubscribe()
+        } else {
+
+            //   binding.main.instaLoginCon.visibility = View.VISIBLE
+            //    binding.main.instaStoryCard.visibility = View.GONE
+
         }
 
         if (dataManager != null) {
             try {
-
 
                 dataManager.reelsTray.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
@@ -715,6 +813,7 @@ class Home : BaseActivity<HomeBinding>(), OnLogInListner {
                             if (stories != null) {
                                 //showMsg(stories.toString())
                                 // instaProgressBar.setVisibility(View.GONE)
+
                                 instagramStatusList.clear()
                                 Log.e(TAG, "onNext: " + stories.tray)
                                 if (stories.tray != null) for (i in 0 until stories.tray.size) {
@@ -777,6 +876,7 @@ class Home : BaseActivity<HomeBinding>(), OnLogInListner {
                         DataSet.Instagram.STATUS,
                         instagramStatusList[position].statusHolder
                     )
+
                     intent.putExtra(DataSet.FROM, DataSet.INSTA_TAG)
                     logD(instagramStatusList[position].tray.user.username)
                     // showMsg(instagramStatusList[position].statusHolder.statusList[0].userName)

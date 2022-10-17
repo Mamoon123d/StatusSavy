@@ -8,10 +8,18 @@
             android:id="@+id/tend_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/progress_bg"
             app:shapeAppearanceOverlay="@style/curve_style"
             />
 
-
+        <ProgressBar
+            android:id="@+id/image_progress"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/x40"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

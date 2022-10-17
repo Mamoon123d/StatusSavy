@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:background="@color/second_color"
         android:layout_height="match_parent">
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-        </androidx.viewpager2.widget.ViewPager2>
-
-       <!-- <com.github.chrisbanes.photoview.PhotoView
+        <!-- <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,10 +25,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />-->
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="-121dp"
+            tools:layout_editor_absoluteY="34dp">
+
+        </androidx.viewpager2.widget.ViewPager2>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/con_1"
+            android:visibility="visible"
             android:paddingVertical="@dimen/x10"
             android:paddingHorizontal="@dimen/x20"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -73,5 +79,37 @@
                 android:textSize="@dimen/s20"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/share_e"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_share_btn"
+            android:elevation="2dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:paddingVertical="@dimen/x6"
+            android:text="@string/share"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:layout_marginBottom="@dimen/x10"
+            android:textColor="@color/text_2"
+            android:textSize="@dimen/s20"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/deleteBt"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:tint="@color/first_color"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/share_e"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/share_e"
+            app:layout_constraintTop_toTopOf="@+id/share_e"
+            app:srcCompat="@drawable/ic_delete" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

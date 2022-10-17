@@ -36,10 +36,7 @@
         <activity android:name=".activity.Home"
             android:theme="@style/Theme.MaterialComponents.NoActionBar"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".activity.OverHome"
@@ -51,17 +48,31 @@
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
             />
         <activity android:name=".activity.MediaView"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-            />
-        <activity android:name=".FB.DownloadActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-            />
-        <activity android:name=".activity.SavedView"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
+            android:name=".FB.DownloadActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
+            android:name=".activity.SavedView"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+        <activity
+            android:name=".activity.WallpaperView"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+        <activity
+            android:name=".activity.AllView"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+        <activity
+            android:name=".activity.Login"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+        <activity
+            android:name=".activity.Splash"
             android:theme="@style/Theme.MaterialComponents.NoActionBar"
-            />
-        <activity android:name=".activity.WallpaperView"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar"
-            />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
