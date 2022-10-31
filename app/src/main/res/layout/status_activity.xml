@@ -1,23 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/black">
-        <FrameLayout
+        android:background="@color/second_color">
+
+        <LinearLayout
+            android:id="@+id/usernamelinear"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:elevation="5dp"
+            android:gravity="left|center_vertical|center_horizontal|center|start"
+            android:paddingStart="@dimen/x15"
+            android:paddingTop="@dimen/x10"
+            android:paddingEnd="@dimen/x15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:shadowColor="@android:color/black"
+                android:shadowRadius="5"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/s10"
+                android:textStyle="bold" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/profile" />
+        </LinearLayout>
+
+        <VideoView
+            android:id="@+id/statusVideo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/statusImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:visibility="visible"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-377dp" />
+
+        <RelativeLayout
+            android:id="@+id/downloadCon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="#51000000"
+            android:padding="@dimen/x10"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/statusImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/usernamelinear">
+
+            <ProgressBar
+                android:id="@+id/downloadProgresBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/downloadPercentage"
+                android:layout_marginTop="@dimen/x12"
+                android:progressDrawable="@drawable/download_progress" />
+
+            <TextView
+                android:id="@+id/downloadPercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView"
+                android:layout_marginTop="@dimen/x12"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="@string/zero_percent"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/s20"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="@string/downloading_story"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/s17" />
+
+            <TextView
+                android:id="@+id/textViewProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/downloadProgresBar"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:textSize="@dimen/s20" />
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/con_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/x20"
+            android:paddingVertical="@dimen/x10"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/share"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_share_btn"
+                android:elevation="2dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:paddingVertical="@dimen/x6"
+                android:text="Share"
+                android:textAlignment="center"
+                android:textColor="@color/text_2"
+                android:textSize="@dimen/s20"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/save"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_share_btn"
+                android:elevation="2dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:paddingVertical="@dimen/x6"
+                android:text="@string/download"
+                android:textAlignment="center"
+                android:textColor="@color/text_2"
+                android:textSize="@dimen/s20"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--<FrameLayout
             android:id="@+id/downloadingFramelayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:elevation="@dimen/x15"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/x10"
                 android:layout_gravity="center_vertical"
+                android:background="#51000000"
                 android:layout_marginStart="@dimen/x10"
                 android:layout_marginEnd="@dimen/x10">
 
@@ -73,8 +226,7 @@
             android:layout_marginTop="@dimen/x10"
             android:layout_marginEnd="3dp"
             android:layout_marginBottom="2dp"
-            android:background="@android:color/black"
-            app:layout_constraintBottom_toTopOf="@+id/bannerAdContainer"
+            android:background="@color/second_color"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_goneMarginTop="@dimen/x20">
 
@@ -108,7 +260,6 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardBackgroundColor="@android:color/darker_gray"
                 app:cardCornerRadius="5dp">
 
                 <ImageView
@@ -117,6 +268,11 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     android:visibility="visible" />
+                <VideoView
+                    android:id="@+id/statusVideo"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
                 <LinearLayout
                     android:id="@+id/usernamelinear"
@@ -156,16 +312,16 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />
 
-                <com.google.android.exoplayer2.ui.PlayerView
+               &lt;!&ndash; <com.google.android.exoplayer2.ui.PlayerView
                     android:id="@+id/video_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/black"
                     android:visibility="gone"
                     app:shutter_background_color="@android:color/darker_gray"
-                    app:use_controller="false" />
+                    app:use_controller="false" />&ndash;&gt;
 
-                <!--<com.lijiankun24.shadowlayout.ShadowLayout
+                &lt;!&ndash;<com.lijiankun24.shadowlayout.ShadowLayout
                     android:id="@+id/shadow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -181,8 +337,8 @@
                     app:shadowSide="all">
 
 
-                </com.lijiankun24.shadowlayout.ShadowLayout>-->
-                <com.digital.statussavvy.utils.StoryStatusView
+                </com.lijiankun24.shadowlayout.ShadowLayout>&ndash;&gt;
+                <com.android.statussavvy.utils.StoryStatusView
                     android:id="@+id/storiesStatus"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
@@ -227,26 +383,16 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <!--            <include-->
-                <!--                android:id="@+id/native_ad_container"-->
-                <!--                layout="@layout/story_saver_native_ad_unit"-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:paddingBottom="5dp"-->
-                <!--                android:visibility="gone" />-->
+                &lt;!&ndash;            <include&ndash;&gt;
+                &lt;!&ndash;                android:id="@+id/native_ad_container"&ndash;&gt;
+                &lt;!&ndash;                layout="@layout/story_saver_native_ad_unit"&ndash;&gt;
+                &lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;
+                &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;
+                &lt;!&ndash;                android:paddingBottom="5dp"&ndash;&gt;
+                &lt;!&ndash;                android:visibility="gone" />&ndash;&gt;
             </androidx.cardview.widget.CardView>
-        </FrameLayout>
+        </FrameLayout>-->
 
-        <LinearLayout
-            android:id="@+id/bannerAdContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:minHeight="100dp"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

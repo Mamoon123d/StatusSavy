@@ -65,7 +65,7 @@
                 android:id="@+id/save"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:text="@string/save"
+                android:text="@string/download"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:elevation="2dp"
@@ -111,5 +111,26 @@
             app:layout_constraintTop_toTopOf="@+id/share_e"
             app:srcCompat="@drawable/ic_delete" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/left_arrow"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/x40"
+            android:alpha="0.50"
+            android:elevation="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/con_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/vp"
+            app:srcCompat="@drawable/ic_left" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/right_arrow"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/x40"
+            android:alpha="0.50"
+            android:elevation="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/con_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/vp"
+            app:srcCompat="@drawable/ic_right" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

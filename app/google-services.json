@@ -1,50 +1,41 @@
 {
   "project_info": {
-    "project_number": "153082912152",
-    "firebase_url": "https://pushnotify-e2051.firebaseio.com",
-    "project_id": "pushnotify-e2051",
-    "storage_bucket": "pushnotify-e2051.appspot.com"
+    "project_number": "511334437597",
+    "project_id": "myfastag-564c4",
+    "storage_bucket": "myfastag-564c4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:153082912152:android:4405783527a1c7dc09dfed",
+        "mobilesdk_app_id": "1:511334437597:android:2802b7be0df8fe811e4134",
         "android_client_info": {
-          "package_name": "com.digi.cashprime"
+          "package_name": "com.android.statussavvy"
         }
       },
       "oauth_client": [
         {
-          "client_id": "153082912152-c0o8fipcveq15j6s1mikmhoo6ms7mu4c.apps.googleusercontent.com",
+          "client_id": "511334437597-21a1g9hoilcm6g0sn3eeri7qml1j9l7j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.digi.cashprime",
-            "certificate_hash": "a1d5691f978d69bb58c68ee413d352159a9176ac"
+            "package_name": "com.android.statussavvy",
+            "certificate_hash": "9fb4afbf7e3d3977ffdcadeabdbdb7cb12dd117a"
           }
         },
         {
-          "client_id": "153082912152-rrku826mkp91cn4gmh7sd4d6fgdo19k1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.digi.cashprime",
-            "certificate_hash": "1544093e854e15e6ff5e62153461b5a877a26eae"
-          }
-        },
-        {
-          "client_id": "153082912152-vst5536ers6pmil1to6ole4t6tgbderj.apps.googleusercontent.com",
+          "client_id": "511334437597-fkf5k5aic7nroj2n9f4v2l51gj1ufn7v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD1d-Frc3lthpGvX2q-baQWnSIxT57S96o"
+          "current_key": "AIzaSyAqJ3a-NSo3ZihcEk5qLYQYcg5SGIligIE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "153082912152-vst5536ers6pmil1to6ole4t6tgbderj.apps.googleusercontent.com",
+              "client_id": "511334437597-fkf5k5aic7nroj2n9f4v2l51gj1ufn7v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -53,35 +44,80 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:153082912152:android:a09493e8d279f87d09dfed",
+        "mobilesdk_app_id": "1:511334437597:android:42abd1a0a9f3185f1e4134",
         "android_client_info": {
-          "package_name": "com.digital.statussavvy"
+          "package_name": "com.jobscafe.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "153082912152-t3b6b9tc65hveifjd30u5d7qqvsv9fjq.apps.googleusercontent.com",
+          "client_id": "511334437597-jufg1tn7n2s7qjpb650psj5jj933g0vk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.digital.statussavvy",
-            "certificate_hash": "1544093e854e15e6ff5e62153461b5a877a26eae"
+            "package_name": "com.jobscafe.android",
+            "certificate_hash": "9fb4afbf7e3d3977ffdcadeabdbdb7cb12dd117a"
           }
         },
         {
-          "client_id": "153082912152-vst5536ers6pmil1to6ole4t6tgbderj.apps.googleusercontent.com",
+          "client_id": "511334437597-fkf5k5aic7nroj2n9f4v2l51gj1ufn7v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD1d-Frc3lthpGvX2q-baQWnSIxT57S96o"
+          "current_key": "AIzaSyAqJ3a-NSo3ZihcEk5qLYQYcg5SGIligIE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "153082912152-vst5536ers6pmil1to6ole4t6tgbderj.apps.googleusercontent.com",
+              "client_id": "511334437597-fkf5k5aic7nroj2n9f4v2l51gj1ufn7v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511334437597:android:79da6742d79750211e4134",
+        "android_client_info": {
+          "package_name": "com.myfastag.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511334437597-1fdpdpg4e94g8j139vvdemfco6fk2975.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myfastag.android",
+            "certificate_hash": "d7fc364d2029ad1822bc0411945f3ff8a859404a"
+          }
+        },
+        {
+          "client_id": "511334437597-im0jt981lajkcfgj7cuhdvm19oopklo8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myfastag.android",
+            "certificate_hash": "79767e75ad9a1c545e8270f751044f0716371f2e"
+          }
+        },
+        {
+          "client_id": "511334437597-fkf5k5aic7nroj2n9f4v2l51gj1ufn7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqJ3a-NSo3ZihcEk5qLYQYcg5SGIligIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511334437597-fkf5k5aic7nroj2n9f4v2l51gj1ufn7v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

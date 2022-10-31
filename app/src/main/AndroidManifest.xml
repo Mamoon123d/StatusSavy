@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.digital.statussavvy">
+    package="com.android.statussavvy">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!--<uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />-->
+    <permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="false"
-        android:name=".insta.InstaStoryApplication"
+        android:name="com.android.statussavvy.insta.InstaStoryApplication"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -24,6 +30,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StatusSavy"
         tools:targetApi="31" >
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -33,39 +40,42 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-        <activity android:name=".activity.Home"
+
+        <activity
+            android:name="com.android.statussavvy.activity.Home"
             android:theme="@style/Theme.MaterialComponents.NoActionBar"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".activity.OverHome"
+            android:name="com.android.statussavvy.activity.OverHome"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".instagram.LoginActivity">
+        <!--<activity android:name=".instagram.LoginActivity">
 
-        </activity>
-        <activity android:name=".activity.StatusActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-            />
-        <activity android:name=".activity.MediaView"
+        </activity>-->
+        <activity
+            android:name="com.android.statussavvy.activity.StatusActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
-            android:name=".FB.DownloadActivity"
+            android:name="com.android.statussavvy.activity.MediaView"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
-            android:name=".activity.SavedView"
+            android:name="com.android.statussavvy.FB.DownloadActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
+            android:name="com.android.statussavvy.activity.SavedView"
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
-            android:name=".activity.WallpaperView"
+            android:name="com.android.statussavvy.activity.WallpaperView"
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
-            android:name=".activity.AllView"
+            android:name="com.android.statussavvy.activity.AllView"
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
-            android:name=".activity.Login"
+            android:name="com.android.statussavvy.activity.Login"
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
-            android:name=".activity.Splash"
+            android:name="com.android.statussavvy.activity.Splash"
             android:theme="@style/Theme.MaterialComponents.NoActionBar"
             android:exported="true">
             <intent-filter>
@@ -73,6 +83,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.Invite"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+        <activity
+            android:name=".activity.Web"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
     </application>
 
 </manifest>

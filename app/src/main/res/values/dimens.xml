@@ -17,10 +17,9 @@
     <dimen name="s12">12sp</dimen>
     <dimen name="x12">12dp</dimen>
     <dimen name="s17">17sp</dimen>
-    <dimen name="x5">5dp</dimen>
     <dimen name="s10">10sp</dimen>
-    <dimen name="x200">200dp</dimen>
     <dimen name="x140">140dp</dimen>
     <dimen name="x35">35dp</dimen>
     <dimen name="x40">40dp</dimen>
+    <dimen name="x70">70dp</dimen>
 </resources>

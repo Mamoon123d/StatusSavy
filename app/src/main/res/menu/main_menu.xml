@@ -4,19 +4,21 @@
         android:id="@+id/download_item"
         android:icon="@drawable/download_icon"
         android:title="@string/download_" />
+ <item
+        android:id="@+id/invite_item"
+        android:icon="@drawable/ic_share"
+        android:title="@string/invite_friends" />
 
     <item
         android:id="@+id/nav_privacyPolicy"
         android:icon="@drawable/ic_privacy"
         android:title="@string/privacy_policy" />
     <item
-        android:id="@+id/nav_contact_us"
+        android:id="@+id/nav_contactUs"
         android:icon="@drawable/ic_contact_us"
         android:title="@string/contact_us" />
 
-    <group
-        android:id="@+id/grp_4"
-        android:checkableBehavior="none">
+    <group android:checkableBehavior="none">
 
         <item
             android:id="@+id/nav_telegram"

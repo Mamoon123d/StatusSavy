@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:paddingHorizontal="@dimen/x20"
+    android:paddingTop="@dimen/x40"
+    android:paddingBottom="@dimen/x20">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/userIv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ivStyle_Circle"
+        app:srcCompat="@drawable/d_persion" />
+
+    <TextView
+        android:id="@+id/nameTv"
+        android:layout_width="@dimen/x0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x10"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="Name"
+        android:textAlignment="center"
+        android:textColor="@color/text_2"
+        android:textSize="@dimen/s16"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userIv" />
+
+    <TextView
+        android:id="@+id/emailTv"
+        android:layout_width="@dimen/x0"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="Email"
+        android:textAlignment="center"
+        android:textColor="@color/text_2"
+        android:textSize="@dimen/s16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameTv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

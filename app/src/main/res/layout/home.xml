@@ -21,6 +21,7 @@
             android:layout_gravity="start"
             android:layout_marginEnd="@dimen/x35"
             android:background="@color/first_color"
+            app:headerLayout="@layout/layout_header"
             app:itemIconTint="@color/text_3"
             app:itemTextColor="@color/text_3"
             app:menu="@menu/main_menu"

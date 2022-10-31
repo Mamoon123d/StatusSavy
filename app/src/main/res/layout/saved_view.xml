@@ -80,13 +80,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/x6"
-                    android:text="Instagram Statuses"
+                    android:text="@string/instagram_status"
                     android:textColor="@color/text_3"
                     android:textSize="@dimen/s16"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/insta_statusRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="3"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/save_wa_item" />
+
+                <TextView
+                    android:id="@+id/downloadTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/x6"
+                    android:text="Downloaded"
+                    android:textColor="@color/text_3"
+                    android:textSize="@dimen/s16"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/downloadedRv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -116,7 +135,18 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>
 
-
+        <TextView
+            android:id="@+id/noItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_item"
+            android:visibility="gone"
+            android:textSize="30sp"
+            android:textColor="@color/text_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

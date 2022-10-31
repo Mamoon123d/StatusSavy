@@ -20,8 +20,8 @@
     <string name="no_users">No data found.</string>
     <string name="download_tending_wallpapers">Download Wallpapers</string>
     <string name="download_">Download</string>
-    <string name="save">save</string>
-    <string name="whatsapp_status">WhatsApp Statuses</string>
+    <string name="save">Save</string>
+    <string name="whatsapp_status">WhatsApp Status</string>
     <string name="trending_wallpapers">Trending Wallpapers</string>
     <string name="view_all">view all</string>
     <string name="gallery">Gallery</string>
@@ -51,6 +51,13 @@
     <string name="new_version_available">New Version Available</string>
     <string name="update_instruction">Please update to get the latest features and best experience.</string>
     <string name="update_now">Update Now</string>
+    <string name="invite">Invite</string>
+    <string name="share_with_your_friends">Share with your Friends</string>
+    <string name="invite_friends">Invite Friends</string>
+    <string name="instagram_status">Instagram Status</string>
+    <string name="downloading">Downloading</string>
+    <string name="download_media">Download Media</string>
+    <string name="no_item">No Downloaded Item</string>
 
 
 </resources>

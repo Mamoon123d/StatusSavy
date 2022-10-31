@@ -1,0 +1,4 @@
+statusSavvy.jks
+keyStore pass : status123
+key alias : statusSavvy_key
+key pass : status123
